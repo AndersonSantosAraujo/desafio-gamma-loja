@@ -1,0 +1,181 @@
+.card-container {
+  margin-bottom: 50px;
+  max-width: 270px;
+
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    perspective: 1000px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+
+    &:hover {
+      transform: rotateY(180deg);
+    }
+
+    &-front {
+      padding: 10px;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      text-align: center;
+
+      &__title {
+        font-size: 1.9rem;
+        text-transform: capitalize;
+        font-weight: bold;
+        color: #000;
+        margin-bottom: 10px;
+      }
+
+      &__price {
+        font-size: 1.9rem;
+        color: #000;
+
+        &--old {
+          font-size: 1.5em;
+          color: #00000090;
+          text-decoration: line-through;
+          margin-bottom: 5px;
+        }
+      }
+
+      &__flags {
+        display: flex;
+
+        .flag {
+          border-radius: 3px;
+          max-width: 110px;
+          text-transform: capitalize;
+          font-size: 12px;
+          text-align: center;
+          padding: 5px 10px;
+          margin-right: 5px;
+          color: #000;
+          font-weight: bold;
+
+          &.grass {
+            background: #9bcc50;
+          }
+          &.poison {
+            background: #b97fc9;
+          }
+          &.fire {
+            background: #fd7d24;
+          }
+          &.flying {
+            background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
+          }
+          &.water {
+            background: #4592c4;
+          }
+          &.bug {
+            background: #729f3f;
+          }
+          &.normal {
+            background: #a4acaf;
+          }
+          &.electric {
+            background: #eed535;
+          }
+          &.ground {
+            background: linear-gradient(180deg, #f7de3f 50%, #ab9842 50%);
+          }
+          &.fairy {
+            background: #fdb9e9;
+          }
+          &.fighting {
+            background: #d56723;
+          }
+          &.psychic {
+            background: #f366b9;
+          }
+          &.rock {
+            background: #a38c21;
+          }
+          &.steel {
+            background: #9eb7b8;
+          }
+          &.ice {
+            background: #51c4e7;
+          }
+          &.ghost {
+            background: #7b62a3;
+          }
+          &.dragon {
+            background: linear-gradient(180deg, #53a4cf 50%, #f16e57 50%);
+          }
+          &.dark {
+            background: #707070;
+          }
+          &.shadow {
+            background: #000;
+            color: #fff;
+          }
+          &.unknown {
+            background: linear-gradient(180deg, #000 50%, #707070 50%);
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    &-back {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 10px;
+      padding: 10px;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      transform: rotateY(180deg);
+      border: 2px solid #000;
+      border-radius: 5px;
+
+      p {
+        font-size: 1.25rem;
+        color: #000;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+
+      ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: left;
+        column-gap: 15px;
+        row-gap: 5px;
+        li {
+          font-size: 1rem;
+          color: #000;
+          font-weight: normal;
+        }
+      }
+    }
+    &__button {
+      border: none;
+      background-color: #000;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: #fff;
+      border: 2px solid #000;
+      width: 100%;
+      height: 40px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: #fff;
+        color: #000;
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__input {
+    width: 30vw;
+    padding: 5px 30px 5px 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.75rem;
+  }
+
+  &__ico {
+    position: absolute;
+    right: 5px;
+  }
+}

@@ -1,0 +1,31 @@
+.productItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  ~ .productItem {
+    margin-top: 10px;
+  }
+
+  &__image {
+    width: 70px;
+  }
+
+  &__data {
+    &--name {
+      font-size: 1.75rem;
+      font-weight: bold;
+    }
+
+    &--price {
+      font-size: 1rem;
+    }
+  }
+
+  &__remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+}

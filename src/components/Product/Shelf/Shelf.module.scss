@@ -1,0 +1,11 @@
+.shelf {
+  margin-top: 100px;
+
+  &__title {
+    font-size: 2rem;
+  }
+
+  &__images {
+    display: flex;
+  }
+}
