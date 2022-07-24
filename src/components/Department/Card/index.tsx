@@ -5,10 +5,13 @@ import styles from "./Card.module.scss";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import Chart from "./Chart";
+import { ArrowUDownLeft } from "phosphor-react";
+import classNames from "classnames";
 
 const Card = ({ url }: any) => {
   const [pokemon, setPokemon] = React.useState<any>({});
   const [dataChart, setDataChart] = React.useState<any>();
+  const [turn, setTurn] = React.useState(false);
   const minicartCX = React.useContext(MinicartContext);
 
   React.useEffect(() => {
@@ -32,8 +35,15 @@ const Card = ({ url }: any) => {
   return (
     <>
       <div className={styles["card-container"]}>
-        <Link to={`/${pokemon.name}`} className={styles["card-front__body"]}>
-          <div className={styles["card"]}>
+        <Link
+          to={`/${pokemon.name}`}
+          className={styles["card-container__link"]}
+        >
+          <div
+            className={classNames(styles["card"], {
+              [styles["turned"]]: turn,
+            })}
+          >
             <div className={styles["card-front"]}>
               <div className={styles["card-front__flags"]}>
                 {pokemon.types &&
@@ -73,12 +83,21 @@ const Card = ({ url }: any) => {
           </div>
         </Link>
 
-        <button
-          onClick={() => minicartCX.addToCart(pokemon)}
-          className={styles["card__button"]}
-        >
-          Add to Cart
-        </button>
+        <div className={styles["card-container__nav"]}>
+          <button
+            onClick={() => minicartCX.addToCart(pokemon)}
+            className={styles["card-container__nav--button"]}
+          >
+            Add to Cart
+          </button>
+
+          <button
+            className={styles["card-container__nav--turn"]}
+            onClick={() => setTurn(!turn)}
+          >
+            <ArrowUDownLeft size={24} />
+          </button>
+        </div>
       </div>
     </>
   );

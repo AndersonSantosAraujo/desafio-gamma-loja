@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import styles from "./Shelf.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import SlickPrevArrow from "components/Slick/SlickArrow";
 
 const Shelf = () => {
   const settings = {
@@ -14,6 +15,8 @@ const Shelf = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    nextArrow: <SlickPrevArrow />,
+    prevArrow: <SlickPrevArrow />,
   };
 
   return (

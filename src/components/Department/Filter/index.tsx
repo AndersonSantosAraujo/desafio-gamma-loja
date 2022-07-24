@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import styles from "./Filter.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import SlickPrevArrow from "components/Slick/SlickArrow";
 
 const Filter = ({ setType, setOffset, numberitems }: any) => {
   const [typeFilter, setTypeFilter] = React.useState([]);
@@ -16,23 +17,25 @@ const Filter = ({ setType, setOffset, numberitems }: any) => {
     slidesToScroll: 3,
     centerMode: true,
     initialSlide: 0,
+    nextArrow: <SlickPrevArrow />,
+    prevArrow: <SlickPrevArrow />,
     responsive: [
       {
-        breakpoint: 1100,
+        breakpoint: 1140,
         settings: {
           slidesToShow: 5,
           slidesToScroll: 5,
         },
       },
       {
-        breakpoint: 830,
+        breakpoint: 880,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
         },
       },
       {
-        breakpoint: 560,
+        breakpoint: 600,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,

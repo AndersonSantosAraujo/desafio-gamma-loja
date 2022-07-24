@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import styles from "./ProductImage.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import SlickPrevArrow from "components/Slick/SlickArrow";
 
 const ProductImage = ({ images }: any) => {
   const settings = {
@@ -13,6 +14,8 @@ const ProductImage = ({ images }: any) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     centerMode: true,
+    nextArrow: <SlickPrevArrow />,
+    prevArrow: <SlickPrevArrow />,
   };
 
   return (
