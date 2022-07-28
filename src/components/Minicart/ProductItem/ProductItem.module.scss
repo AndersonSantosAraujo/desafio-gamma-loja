@@ -2,7 +2,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  padding: 10px;
+
+  &:hover {
+    background: #00000010;
+  }
 
   ~ .productItem {
     margin-top: 10px;
@@ -16,10 +20,12 @@
     &--name {
       font-size: 1.75rem;
       font-weight: bold;
+      text-transform: capitalize;
     }
 
     &--price {
-      font-size: 1rem;
+      font-size: 1.5rem;
+      margin-top: 10px;
     }
   }
 
@@ -27,5 +33,6 @@
     background: none;
     border: none;
     cursor: pointer;
+    padding: 20px 10px;
   }
 }

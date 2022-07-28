@@ -1,11 +1,17 @@
-import React from "react";
 import Slider from "react-slick";
 import styles from "./ProductImage.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SlickPrevArrow from "components/Slick/SlickArrow";
 
-const ProductImage = ({ images }: any) => {
+interface IImage {
+  front_default: string | null;
+  front_female: string | null;
+  front_shiny: string | null;
+  front_shiny_female: string | null;
+}
+
+const ProductImage = ({ images }: { images: IImage }) => {
   const settings = {
     dots: true,
     arrow: true,

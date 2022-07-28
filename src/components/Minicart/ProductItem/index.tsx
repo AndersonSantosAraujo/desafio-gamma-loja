@@ -1,3 +1,4 @@
+import { Trash } from "phosphor-react";
 import React from "react";
 import { MinicartContext } from "../MinicartContext";
 import styles from "./ProductItem.module.scss";
@@ -25,7 +26,7 @@ const ProductItem = ({ id, image, name, price }: Props) => {
         className={styles["productItem__remove"]}
         onClick={() => minicartCX.removeToCart(id)}
       >
-        X
+        <Trash size={18} />
       </button>
     </li>
   );

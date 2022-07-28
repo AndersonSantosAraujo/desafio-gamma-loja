@@ -1,5 +1,5 @@
 import { MinicartContext } from "components/Minicart/MinicartContext";
-import React from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Card.module.scss";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -8,32 +8,47 @@ import Chart from "./Chart";
 import { ArrowUDownLeft } from "phosphor-react";
 import classNames from "classnames";
 
-const Card = ({ url }: any) => {
-  const [pokemon, setPokemon] = React.useState<any>({});
-  const [dataChart, setDataChart] = React.useState<any>();
-  const [turn, setTurn] = React.useState(false);
-  const minicartCX = React.useContext(MinicartContext);
+const Card = ({ url }: { url: string }) => {
+  const [pokemon, setPokemon] = useState<IPokemon | undefined>();
+  const [dataChart, setDataChart] = useState();
+  const [turn, setTurn] = useState(false);
+  const minicartCX = useContext(MinicartContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        // console.log("🚀", data);
         setDataChart(data.stats);
         setPokemon({
           id: data.id,
           image: data.sprites.other["official-artwork"].front_default,
           name: data.name,
           price: data.base_experience,
+          quantity: 1,
           stats: data.stats,
           types: data.types,
-          quantity: 1,
         });
       });
   }, []);
 
-  return (
-    <>
+  interface IPokemon {
+    id: number;
+    image: string;
+    name: string;
+    price: number;
+    quantity: number;
+    stats: [
+      {
+        base_stat: number;
+        effort: number;
+        stat: { name: string; url: string };
+      },
+    ];
+    types: [{ slot: number; type: { name: string; url: string } }];
+  }
+
+  if (pokemon)
+    return (
       <div className={styles["card-container"]}>
         <Link
           to={`/${pokemon.name}`}
@@ -47,21 +62,28 @@ const Card = ({ url }: any) => {
             <div className={styles["card-front"]}>
               <div className={styles["card-front__flags"]}>
                 {pokemon.types &&
-                  pokemon.types.map(({ type }: any) => (
-                    <span
-                      className={`${styles["flag"]}  ${styles[type.name]}`}
-                      key={type.name}
-                    >
-                      {type.name}
-                    </span>
-                  ))}
+                  pokemon.types.map(
+                    ({
+                      type,
+                    }: {
+                      slot: number;
+                      type: { name: string; url: string };
+                    }) => (
+                      <span
+                        className={`${styles["flag"]}  ${styles[type.name]}`}
+                        key={type.name}
+                      >
+                        {type.name}
+                      </span>
+                    ),
+                  )}
               </div>
 
               <LazyLoadImage
                 src={
                   pokemon.image
                     ? pokemon.image
-                    : "https://via.placeholder.com/250x250.png?text=Image+Not+Found"
+                    : "https://via.placeholder.com/250x250.png?text=pokeshop"
                 }
                 alt={`Imagem de ${pokemon.name}`}
                 height={250}
@@ -99,8 +121,8 @@ const Card = ({ url }: any) => {
           </button>
         </div>
       </div>
-    </>
-  );
+    );
+  else return null;
 };
 
 export default Card;

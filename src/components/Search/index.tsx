@@ -9,21 +9,26 @@ const Search = () => {
   const numberItems = 12;
   const [offset, setOffset] = React.useState<number>(numberItems);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [pokemons, setPokemons] = React.useState<any>([]);
+  const [pokemons, setPokemons] = React.useState([]);
+  const [maxItems, setMaxItems] = React.useState(true);
+
+  React.useEffect(() => {
+    setOffset(numberItems);
+  }, [searchParams]);
 
   React.useEffect(() => {
     const searchterm = searchParams.get("searchTerm") || "";
-
     fetch(`https://pokeapi.co/api/v2/pokemon/?limit=1499`)
       .then((response) => response.json())
       .then(({ results }) => {
         var regex = new RegExp(searchterm, "i");
 
-        var filter = results.filter(({ name }: any) => {
+        var filter = results.filter(({ name }: { name: string }) => {
           return regex.test(name);
         });
 
         setPokemons(filter.slice(0, offset));
+        // if (filter.length <= offset) setMaxItems(false);
       });
   }, [searchParams, offset]);
 
@@ -33,18 +38,20 @@ const Search = () => {
       <main className="container">
         <div className={styles["mainDepartment"]}>
           <div className={styles["mainDepartment__productList"]}>
-            {pokemons.map(({ url }: any) => (
+            {pokemons.map(({ url }: { url: string }) => (
               <Card url={url} key={url} />
             ))}
           </div>
         </div>
 
-        <button
-          onClick={() => setOffset(offset + numberItems)}
-          className={styles["mainDepartment__viewMore"]}
-        >
-          Ver mais...
-        </button>
+        {maxItems && (
+          <button
+            onClick={() => setOffset(offset + numberItems)}
+            className={styles["mainDepartment__viewMore"]}
+          >
+            Ver mais...
+          </button>
+        )}
 
         <button
           className={styles["toTop"]}

@@ -1,12 +1,20 @@
-import React from "react";
 import Slider from "react-slick";
 import styles from "./Filter.module.scss";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SlickPrevArrow from "components/Slick/SlickArrow";
+import React, { Dispatch, useEffect, useState } from "react";
 
-const Filter = ({ setType, setOffset, numberitems }: any) => {
-  const [typeFilter, setTypeFilter] = React.useState([]);
+const Filter = ({
+  setType,
+  setOffset,
+  numberitems,
+}: {
+  setType: Dispatch<any>;
+  setOffset: Dispatch<number>;
+  numberitems: number;
+}) => {
+  const [typeFilter, setTypeFilter] = useState([]);
 
   const settings = {
     dots: false,
@@ -51,7 +59,7 @@ const Filter = ({ setType, setOffset, numberitems }: any) => {
     ],
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch(`https://pokeapi.co/api/v2/type/?limit=1499`)
       .then((response) => response.json())
       .then(({ results }) => {
@@ -59,9 +67,9 @@ const Filter = ({ setType, setOffset, numberitems }: any) => {
       });
   }, []);
 
-  function handleType(e: any) {
+  function handleType(e: React.SyntheticEvent<EventTarget>) {
     setOffset(numberitems);
-    setType([e.target.value]);
+    setType((e.target as HTMLInputElement).value);
   }
 
   return (
@@ -69,7 +77,7 @@ const Filter = ({ setType, setOffset, numberitems }: any) => {
       <div className={styles["filter__box"]}>
         <Slider {...settings}>
           {typeFilter &&
-            typeFilter.map(({ name, url }: any) => (
+            typeFilter.map(({ name, url }: { name: string; url: string }) => (
               <label className={styles[name]} key={name}>
                 <input
                   type="radio"

@@ -1,17 +1,33 @@
 import classNames from "classnames";
-import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Minicart.module.scss";
 import { MinicartContext } from "./MinicartContext";
 import ProductItem from "./ProductItem";
 
-interface Props {
+interface IMinicart {
   show: boolean;
   showMinicart: any;
 }
 
-const Minicart = ({ show, showMinicart }: Props) => {
-  const minicartCX = React.useContext(MinicartContext);
+interface IMinicartItem {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  quantity: number;
+  stats: [
+    {
+      base_stat: number;
+      effort: number;
+      stat: { name: string; url: string };
+    },
+  ];
+  types: [{ slot: number; type: { name: string; url: string } }];
+}
+
+const Minicart = ({ show, showMinicart }: IMinicart) => {
+  const minicartCX = useContext(MinicartContext);
 
   return (
     <div
@@ -20,8 +36,7 @@ const Minicart = ({ show, showMinicart }: Props) => {
       })}
     >
       <ul className={styles["minicart__list"]}>
-        {/* {minicart.items && console.log("🚀", minicart.items)} */}
-        {minicartCX.items.map((item: any) => (
+        {minicartCX.items.map((item: IMinicartItem) => (
           <ProductItem key={item.id} {...item} />
         ))}
       </ul>
@@ -31,7 +46,7 @@ const Minicart = ({ show, showMinicart }: Props) => {
         </span>
         {minicartCX.items.length > 0 ? (
           <Link to="/checkout" className={styles["minicart__footer--btn"]}>
-            Finalizar Compra
+            To Checkout
           </Link>
         ) : (
           <button

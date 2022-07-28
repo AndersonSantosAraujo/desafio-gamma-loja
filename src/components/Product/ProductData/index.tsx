@@ -1,7 +1,6 @@
-import React from "react";
 import styles from "./ProductData.module.scss";
 
-const ProductData = ({ desc }: any) => {
+const ProductData = ({ desc }: { desc: string }) => {
   return (
     <div className={styles["productData"]}>
       <h2>Descrição:</h2>

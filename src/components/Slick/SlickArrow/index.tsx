@@ -1,6 +1,15 @@
 import styles from "./SlickArrow.module.scss";
 
-const SlickPrevArrow = (props: any) => {
+interface ISlick {
+  className?: string;
+  currentSlide?: number;
+  dataRole?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
+  slideCount?: number;
+  style?: { display?: string };
+}
+
+const SlickPrevArrow = (props: ISlick) => {
   const { className, style, onClick } = props;
   return (
     <div

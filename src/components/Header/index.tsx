@@ -21,23 +21,26 @@ const Header = () => {
 
           <Search />
 
-          <button className={styles["header__navigation--user"]}>
-            <UserCircle size={32} color="#fff" />
-          </button>
+          <div className={styles["header-buttons"]}>
+            <button className={styles["header-buttons__user"]}>
+              <UserCircle size={32} color="#fff" />
+            </button>
 
-          <button
-            className={styles["header__navigation--minicart"]}
-            onClick={() => minicartCX.showMinicart()}
-          >
-            <ShoppingCart size={32} color="#fff" />
-            <span
-              className={classNames(styles["minicart-badge"], {
-                [styles["hidden"]]: minicartCX.items.length === 0,
-              })}
+            <button
+              className={styles["header-buttons__minicart"]}
+              onClick={() => minicartCX.showMinicart()}
             >
-              {minicartCX.items.length}
-            </span>
-          </button>
+              <ShoppingCart size={32} color="#fff" />
+              <span
+                className={classNames(styles["minicart-badge"], {
+                  [styles["hidden"]]: minicartCX.items.length === 0,
+                })}
+              >
+                {minicartCX.items.length}
+              </span>
+            </button>
+          </div>
+
           <Minicart
             show={minicartCX.show}
             showMinicart={minicartCX.showMinicart}

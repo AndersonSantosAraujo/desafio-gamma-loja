@@ -18,9 +18,17 @@ ChartJS.register(
   Legend,
 );
 
-const Chart = ({ dataChart }: any) => {
+interface IDataChart {
+  base_stat: number;
+  effort: number;
+  stat: { name: string; url: string };
+}
+
+const Chart = ({ dataChart }: { dataChart: IDataChart[] }) => {
   const labels = ["HP", "AT", "DF", "SA", "SD", "SP"];
-  const data = dataChart.map(({ base_stat }: any) => base_stat);
+  const data = dataChart.map(
+    ({ base_stat }: { base_stat: number }) => base_stat,
+  );
 
   const chartData = {
     labels: labels,

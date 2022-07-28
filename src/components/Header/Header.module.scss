@@ -12,37 +12,48 @@
     justify-content: space-between;
     align-items: center;
 
-    &--minicart {
-      position: relative;
-      cursor: pointer;
-      background: transparent;
+    @media (max-width: 600px) {
+      flex-direction: column;
+      row-gap: 10px;
+    }
 
-      .minicart-badge {
-        position: absolute;
-        top: -5px;
-        right: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: #ff0000;
-        color: #fff;
-        opacity: 1;
-        visibility: visible;
-        transition: 0.3s;
-        font-size: 1rem;
-        font-weight: bold;
+    .header-buttons {
+      &__user {
+        cursor: pointer;
+        background: transparent;
+      }
 
-        &.hidden {
-          opacity: 0;
-          visibility: hidden;
+      &__minicart {
+        position: relative;
+        cursor: pointer;
+        background: transparent;
+
+        .minicart-badge {
+          position: absolute;
+          top: -5px;
+          right: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background-color: #ff0000;
+          color: #fff;
+          opacity: 1;
+          visibility: visible;
+          transition: 0.3s;
+          font-size: 1rem;
+          font-weight: bold;
+
+          &.hidden {
+            opacity: 0;
+            visibility: hidden;
+          }
         }
       }
     }
   }
-
   .backdrop {
     opacity: 0;
     visibility: hidden;
@@ -54,6 +65,10 @@
     background: #00000080;
     z-index: 99;
     transition: 0.3s;
+
+    @media (max-width: 600px) {
+      top: 160px;
+    }
 
     &.backdropShow {
       opacity: 1;

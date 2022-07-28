@@ -1,17 +1,17 @@
 import Header from "components/Header";
-import React from "react";
 import Card from "components/Department/Card";
 import styles from "./Department.module.scss";
 import Footer from "components/Footer";
 import Filter from "./Filter";
+import { useEffect, useState } from "react";
 
 const Department = () => {
   const numberItems = 12;
-  const [pokemons, setPokemons] = React.useState<any>([]);
-  const [offset, setOffset] = React.useState<number>(numberItems);
-  const [type, setType] = React.useState([]);
+  const [pokemons, setPokemons] = useState([]);
+  const [offset, setOffset] = useState(numberItems);
+  const [type, setType] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (type.length === 0) {
       fetch(`https://pokeapi.co/api/v2/pokemon/?limit=1499`)
         .then((response) => response.json())
@@ -22,14 +22,19 @@ const Department = () => {
       fetch(`${type}?limit=1499`)
         .then((response) => response.json())
         .then(({ pokemon }) => {
-          const results = pokemon.map(({ pokemon }: any) => {
-            return pokemon;
+          const results = pokemon.map((data: IPokemon) => {
+            return data.pokemon;
           });
 
           setPokemons(results.slice(0, offset));
         });
     }
   }, [offset, type]);
+
+  interface IPokemon {
+    pokemon: { name: string; url: string };
+    slot: number;
+  }
 
   return (
     <>
@@ -42,7 +47,7 @@ const Department = () => {
         />
 
         <div className={styles["mainDepartment__productList"]}>
-          {pokemons.map(({ url }: any) => (
+          {pokemons.map(({ url }: { url: string }) => (
             <Card url={url} key={url} />
           ))}
         </div>
